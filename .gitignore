@@ -1,0 +1,11 @@
+# Build folders
+build*/
+_build*/
+cmake-build*/
+
+# CMake
+CMakeUserPresets.json
+
+# Cache files
+*.swp
+.cache
