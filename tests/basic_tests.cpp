@@ -14,3 +14,28 @@ TEST(ConstructorTest, RowsAndColumns)
 
     EXPECT_EQ(empty.empty(), true);
 }
+
+TEST(ShapeTest, CorrectReshape)
+{
+    linalg::Matrix mat(10, 4);
+
+    try
+    {
+        mat.reshape(2, 20);
+    }
+    catch(...)
+    {FAIL();}
+}
+
+TEST(ShapeTest, UncorrectReshape)
+{
+    linalg::Matrix mat(10, 4);
+
+    try
+    {
+        mat.reshape(2, 25);
+        FAIL();
+    }
+    catch(const std::out_of_range& expected)
+    {}
+}

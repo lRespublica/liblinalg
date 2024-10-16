@@ -2,6 +2,7 @@
 
 #include "liblinalg/export.h"
 #include <cstdint>
+#include <stdexcept>
 
 namespace linalg {
 
@@ -12,6 +13,8 @@ namespace linalg {
 
             uint32_t rows();
             uint32_t columns();
+
+            void reshape(uint32_t rows, uint32_t columns);
 
             bool empty();
         private:

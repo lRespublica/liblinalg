@@ -21,6 +21,15 @@ namespace linalg {
         return m_columns;
     }
 
+    void Matrix::reshape(uint32_t rows, uint32_t columns)
+    {
+        if(rows * columns != m_rows * m_columns)
+            throw std::out_of_range("Wrong shape");
+
+        m_rows = rows;
+        m_columns = columns;
+    }
+
     bool Matrix::empty()
     {
         return m_empty;
