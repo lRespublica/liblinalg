@@ -14,6 +14,7 @@ include(GNUInstallDirs)
 string(COMPARE EQUAL "${CMAKE_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}" is_top_level)
 
 # LIBLINALG_SHARED_LIBS option (undefined by default) can be used to force shared/static build
+option(LIBLINALG_BUILD_TESTS "Build liblinalg tests" OFF)
 option(LIBLINALG_INSTALL "Generate target for installing liblinalg" ${is_top_level})
 set_if_undefined(LIBLINALG_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/liblinalg" CACHE STRING
     "Install path for liblinalg package-related CMake files")
@@ -126,4 +127,9 @@ if(LIBLINALG_INSTALL AND NOT CMAKE_SKIP_INSTALL_RULES)
             DESTINATION "${pdb_file_destination}"
             OPTIONAL)
     endif()
+endif()
+
+if(LIBLINALG_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
