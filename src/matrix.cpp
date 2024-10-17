@@ -4,13 +4,13 @@ namespace linalg {
     Matrix::Matrix()
     {init(0, 0);}
 
-    Matrix::Matrix(uint32_t rows)
+    Matrix::Matrix(const uint32_t rows)
     {init(rows, 1);}
 
-    Matrix::Matrix(uint32_t rows, uint32_t columns)
+    Matrix::Matrix(const uint32_t rows, const uint32_t columns)
     {init(rows, columns);}
 
-    void Matrix::init(uint32_t rows, uint32_t columns)
+    void Matrix::init(const uint32_t rows, const uint32_t columns)
     {
         m_rows = rows;
         m_columns = columns;
@@ -20,12 +20,12 @@ namespace linalg {
         m_ptr = new double[m_rows * m_columns];
     }
 
-    uint32_t Matrix::rows()
+    uint32_t Matrix::rows() const
     {
         return m_rows;
     }
 
-    uint32_t Matrix::columns()
+    uint32_t Matrix::columns() const
     {
         return m_columns;
     }
@@ -39,7 +39,7 @@ namespace linalg {
         m_columns = columns;
     }
 
-    bool Matrix::empty()
+    bool Matrix::empty() const
     {
         return m_empty;
     }

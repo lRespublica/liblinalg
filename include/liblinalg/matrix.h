@@ -10,17 +10,17 @@ namespace linalg {
     {
         public:
             Matrix();
-            Matrix(uint32_t rows);
-            Matrix(uint32_t rows, uint32_t columns);
+            Matrix(const uint32_t rows);
+            Matrix(const uint32_t rows, const uint32_t columns);
 
-            uint32_t rows();
-            uint32_t columns();
+            uint32_t rows() const;
+            uint32_t columns() const;
 
-            void reshape(uint32_t rows, uint32_t columns);
+            void reshape(const uint32_t rows, const uint32_t columns);
 
-            bool empty();
+            bool empty() const;
         private:
-            void init(uint32_t rows, uint32_t columns);
+            void init(const uint32_t rows, const uint32_t columns);
 
             double* m_ptr;
             uint32_t m_rows;
