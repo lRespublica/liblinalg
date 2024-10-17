@@ -3,6 +3,7 @@
 #include "liblinalg/export.h"
 #include <cstdint>
 #include <stdexcept>
+#include <initializer_list>
 #include <utility>
 
 namespace linalg {
@@ -20,6 +21,8 @@ namespace linalg {
             Matrix(Matrix&& mat) noexcept;
             Matrix& operator=(Matrix&& mat) noexcept;
 
+            Matrix(std::initializer_list<std::initializer_list<double>> input);
+
             ~Matrix();
 
             uint32_t rows() const;
@@ -30,6 +33,9 @@ namespace linalg {
 
             double& operator()(const uint32_t x, const uint32_t y);
             const double& operator()(const uint32_t x, const uint32_t y) const;
+
+            double& at(const uint32_t x, const uint32_t y);
+            const double& at(const uint32_t x, const uint32_t y) const;
 
             const double* data() const;
 

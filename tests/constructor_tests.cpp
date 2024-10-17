@@ -1,7 +1,9 @@
 #include <liblinalg/matrix.h>
 
 #include <gtest/gtest.h>
+#include <ostream>
 #include <utility>
+#include <iostream>
 
 TEST(ConstructorTest, RowsAndColumns)
 {
@@ -141,14 +143,7 @@ TEST(ConstructorTest, CopyAndMoveWithAssignment)
     try
     {
         linalg::Matrix test(height, width);
-
-        for (auto i = 0; i < test.rows(); i++)
-        {
-            for (auto j = 0; j < test.columns(); j++)
-            {
-                test(i, j) = i * test.rows() + j;
-            }
-        }
+        test = {{1}, {2}, {3}, {4}, {5}};
 
         linalg::Matrix tmpMat = test;
         EXPECT_NE(tmpMat.data(), nullptr);
@@ -163,6 +158,38 @@ TEST(ConstructorTest, CopyAndMoveWithAssignment)
             for (auto j = 0; j < newMat.columns(); j++)
             {
                 EXPECT_EQ(test(i,j),  newMat(i,j));
+            }
+        }
+    }
+    catch (...)
+    {FAIL();}
+}
+
+TEST(ConstructorTest, InitalizerList)
+{
+    uint32_t height = 3;
+    uint32_t width = 5;
+    try
+    {
+        linalg::Matrix test(height, width);
+
+        for (auto i = 0; i < test.rows(); i++)
+        {
+            for (auto j = 0; j < test.columns(); j++)
+            {
+                test(i, j) = i * test.columns() + j + 1;
+            }
+        }
+
+        linalg::Matrix ref = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14,15}};
+        EXPECT_EQ(ref.rows(), 3);
+        EXPECT_EQ(ref.columns(), 5);
+
+        for (auto i = 0; i < test.rows(); i++)
+        {
+            for (auto j = 0; j < test.columns(); j++)
+            {
+                EXPECT_EQ(test(i, j), ref(i, j));
             }
         }
     }

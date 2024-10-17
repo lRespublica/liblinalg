@@ -46,6 +46,40 @@ namespace linalg {
        return *this;
     }
 
+    Matrix::Matrix(std::initializer_list<std::initializer_list<double>> input)
+    {
+        if(input.size() == 0)
+        {
+            init(0, 0);
+            return;
+        }
+
+        auto rows = input.size();
+        auto columns = input.begin()->size();
+
+        for (auto row : input)
+        {
+            if(row.size() != columns)
+                throw std::out_of_range("Matrix: Given array is not matrix");
+        }
+
+        init(rows, columns);
+
+        int rowCount = 0;
+        for(auto row : input)
+        {
+            int colCount = 0;
+
+            for(auto elem : row)
+            {
+                at(rowCount, colCount) = elem;
+
+                colCount++;
+            }
+            rowCount++;
+        }
+    }
+
     void Matrix::init(const uint32_t rows, const uint32_t columns)
     {
         m_rows = rows;
@@ -84,6 +118,8 @@ namespace linalg {
         }
     }
 
+
+
     void Matrix::reshape(uint32_t rows, uint32_t columns)
     {
         if(rows * columns != m_size)
@@ -93,21 +129,22 @@ namespace linalg {
         m_columns = columns;
     }
 
-    double& Matrix::operator()(const uint32_t x, const uint32_t y)
+    double& Matrix::at(const uint32_t x, const uint32_t y)
     {
         if(x >= m_rows || y >= m_columns)
             throw std::out_of_range("Matrix: Out of bounds");
 
         return m_ptr[y*m_rows + x];
     }
+
+    const double& Matrix::at(const uint32_t x, const uint32_t y) const
+    {return this->at(x, y);}
+
+    double& Matrix::operator()(const uint32_t x, const uint32_t y)
+    {return this->at(x, y);}
 
     const double& Matrix::operator()(const uint32_t x, const uint32_t y) const
-    {
-        if(x >= m_rows || y >= m_columns)
-            throw std::out_of_range("Matrix: Out of bounds");
-
-        return m_ptr[y*m_rows + x];
-    }
+    {return this->at(x, y);}
 
     bool Matrix::empty() const
     {
