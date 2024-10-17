@@ -14,10 +14,12 @@ namespace linalg {
             Matrix(const uint32_t rows, const uint32_t columns);
 
             Matrix(const Matrix& mat);
+            ~Matrix();
 
             uint32_t rows() const;
             uint32_t columns() const;
 
+            void clear();
             void reshape(const uint32_t rows, const uint32_t columns);
 
             double& operator()(const uint32_t x, const uint32_t y);

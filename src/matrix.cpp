@@ -4,6 +4,9 @@ namespace linalg {
     Matrix::Matrix()
     {init(0, 0);}
 
+    Matrix::~Matrix()
+    {clear();}
+
     Matrix::Matrix(const uint32_t rows)
     {init(rows, 1);}
 
@@ -42,6 +45,20 @@ namespace linalg {
     uint32_t Matrix::columns() const
     {
         return m_columns;
+    }
+
+    void Matrix::clear()
+    {
+        m_columns = 0;
+        m_rows = 0;
+        m_columns = 0;
+        m_empty = true;
+
+        if(m_ptr != nullptr)
+        {
+            delete [] m_ptr;
+            m_ptr = nullptr;
+        }
     }
 
     void Matrix::reshape(uint32_t rows, uint32_t columns)
