@@ -30,7 +30,8 @@ find_package(GTest CONFIG REQUIRED)
 #----------------------------------------------------------------------------------------------------------------------
 
 set(sources
-    basic_tests.cpp)
+    constructor_tests.cpp
+    shape_tests.cpp)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources})
 
 #----------------------------------------------------------------------------------------------------------------------
