@@ -4,10 +4,10 @@
 
 TEST(ShapeTest, CorrectReshape)
 {
-    linalg::Matrix mat(10, 4);
-
     try
     {
+        linalg::Matrix mat(10, 4);
+
         mat.reshape(2, 20);
 
         EXPECT_EQ(mat.rows(), 2);
@@ -20,14 +20,16 @@ TEST(ShapeTest, CorrectReshape)
 
 TEST(ShapeTest, UncorrectReshape)
 {
-    linalg::Matrix mat(10, 4);
-
     try
     {
+        linalg::Matrix mat(10, 4);
+
         mat.reshape(2, 25);
         FAIL();
     }
     catch(const std::out_of_range& expected)
     {}
+    catch(...)
+    {FAIL();}
 }
 
