@@ -146,6 +146,56 @@ namespace linalg {
     const double& Matrix::operator()(const uint32_t x, const uint32_t y) const
     {return this->at(x, y);}
 
+    std::vector<std::string> Matrix::getStrings() const
+    {
+        std::vector<std::string> strings;
+
+        for(int i = 0; i < m_size; i++)
+        {
+            auto str = std::to_string(m_ptr[i]);
+
+            str.erase ( str.find_last_not_of('0') + 1, std::string::npos );
+            str.erase ( str.find_last_not_of('.') + 1, std::string::npos );
+
+            strings.push_back(str);
+        }
+
+        return strings;
+    }
+
+    std::ostream& operator<<(std::ostream& os, linalg::Matrix const& mat)
+    {
+        auto strings = std::move(mat.getStrings());
+        uint32_t maxLen = 0;
+
+        for(auto str : strings)
+        {
+            auto tmp = str.length();
+
+            if (tmp > maxLen)
+                maxLen = tmp;
+        }
+
+        auto oldWidth = os.width();
+
+        for(auto i = 0; i < mat.m_rows; i++)
+        {
+            os << "|";
+
+            for(auto j = 0; j < mat.m_columns; j++)
+            {
+                os.width(maxLen);
+                os << strings[i*mat.m_rows + j];
+                os << " ";
+            }
+
+            os.width(oldWidth);
+            os << "|\n";
+        }
+
+        return os;
+    }
+
     bool Matrix::empty() const
     {
         return m_empty;

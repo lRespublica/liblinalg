@@ -30,6 +30,7 @@ find_package(GTest CONFIG REQUIRED)
 #----------------------------------------------------------------------------------------------------------------------
 
 set(sources
+    output_tests.cpp
     index_tests.cpp
     constructor_tests.cpp
     shape_tests.cpp)

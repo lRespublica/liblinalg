@@ -2,9 +2,12 @@
 
 #include "liblinalg/export.h"
 #include <cstdint>
+#include <ostream>
 #include <stdexcept>
 #include <initializer_list>
 #include <utility>
+#include <string>
+#include <vector>
 
 namespace linalg {
 
@@ -40,8 +43,13 @@ namespace linalg {
             const double* data() const;
 
             bool empty() const;
+
+            LIBLINALG_EXPORT friend std::ostream& operator<<(std::ostream& os, linalg::Matrix const& mat);
+
         private:
             void init(const uint32_t rows, const uint32_t columns);
+
+            std::vector<std::string> getStrings() const;
 
             double* m_ptr;
             uint32_t m_rows;
