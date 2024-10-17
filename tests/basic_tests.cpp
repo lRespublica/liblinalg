@@ -40,6 +40,10 @@ TEST(ShapeTest, CorrectReshape)
     try
     {
         mat.reshape(2, 20);
+
+        EXPECT_EQ(mat.rows(), 2);
+        EXPECT_EQ(mat.columns(), 20);
+        EXPECT_EQ(mat.empty(), false);
     }
     catch(...)
     {FAIL();}
