@@ -18,6 +18,9 @@ namespace linalg {
 
             void reshape(const uint32_t rows, const uint32_t columns);
 
+            double& operator()(const uint32_t x, const uint32_t y);
+            const double& operator()(const uint32_t x, const uint32_t y) const;
+
             bool empty() const;
         private:
             void init(const uint32_t rows, const uint32_t columns);

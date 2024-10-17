@@ -33,10 +33,26 @@ namespace linalg {
     void Matrix::reshape(uint32_t rows, uint32_t columns)
     {
         if(rows * columns != m_rows * m_columns)
-            throw std::out_of_range("Wrong shape");
+            throw std::out_of_range("Matrix: Wrong shape");
 
         m_rows = rows;
         m_columns = columns;
+    }
+
+    double& Matrix::operator()(const uint32_t x, const uint32_t y)
+    {
+        if(x > m_rows || y > m_columns)
+            throw std::out_of_range("Matrix: Out of bounds");
+
+        return m_ptr[y*m_rows + x];
+    }
+
+    const double& Matrix::operator()(const uint32_t x, const uint32_t y) const
+    {
+        if(x > m_rows || y > m_columns)
+            throw std::out_of_range("Matrix: Out of bounds");
+
+        return m_ptr[y*m_rows + x];
     }
 
     bool Matrix::empty() const
