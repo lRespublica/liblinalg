@@ -1,7 +1,16 @@
 #include "liblinalg/matrix.h"
 
 namespace linalg {
+    Matrix::Matrix()
+    {init(0, 0);}
+
+    Matrix::Matrix(uint32_t rows)
+    {init(rows, 1);}
+
     Matrix::Matrix(uint32_t rows, uint32_t columns)
+    {init(rows, columns);}
+
+    void Matrix::init(uint32_t rows, uint32_t columns)
     {
         m_rows = rows;
         m_columns = columns;

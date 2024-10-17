@@ -15,6 +15,24 @@ TEST(ConstructorTest, RowsAndColumns)
     EXPECT_EQ(empty.empty(), true);
 }
 
+TEST(ConstructorTest, LesserShape)
+{
+    linalg::Matrix mat(10);
+
+    EXPECT_EQ(mat.rows(), 10);
+    EXPECT_EQ(mat.columns(), 1);
+    EXPECT_EQ(mat.empty(), false);
+}
+
+TEST(ConstructorTest, EmptyMatrix)
+{
+    linalg::Matrix mat;
+
+    EXPECT_EQ(mat.rows(), 0);
+    EXPECT_EQ(mat.columns(), 0);
+    EXPECT_EQ(mat.empty(), true);
+}
+
 TEST(ShapeTest, CorrectReshape)
 {
     linalg::Matrix mat(10, 4);

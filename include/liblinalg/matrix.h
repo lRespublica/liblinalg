@@ -9,6 +9,8 @@ namespace linalg {
     class LIBLINALG_EXPORT Matrix
     {
         public:
+            Matrix();
+            Matrix(uint32_t rows);
             Matrix(uint32_t rows, uint32_t columns);
 
             uint32_t rows();
@@ -18,6 +20,8 @@ namespace linalg {
 
             bool empty();
         private:
+            void init(uint32_t rows, uint32_t columns);
+
             double* m_ptr;
             uint32_t m_rows;
             uint32_t m_columns;
