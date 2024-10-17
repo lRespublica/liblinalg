@@ -66,3 +66,34 @@ TEST(ConstructorTest, EmptyMatrix)
     {FAIL();}
 
 }
+
+TEST(ConstructorTest, CopyConstructor)
+{
+    uint32_t height = 10;
+    uint32_t width = 12;
+    try
+    {
+        linalg::Matrix test(height, width);
+
+        for (auto i = 0; i < test.rows(); i++)
+        {
+            for (auto j = 0; j < test.columns(); j++)
+            {
+                test(i, j) = i * test.rows() + j;
+            }
+        }
+
+        linalg::Matrix newMat{test};
+
+        for (auto i = 0; i < newMat.rows(); i++)
+        {
+            for (auto j = 0; j < newMat.columns(); j++)
+            {
+                EXPECT_EQ(test(i,j),  newMat(i,j));
+            }
+        }
+    }
+    catch (...)
+    {FAIL();}
+}
+

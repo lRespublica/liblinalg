@@ -10,14 +10,25 @@ namespace linalg {
     Matrix::Matrix(const uint32_t rows, const uint32_t columns)
     {init(rows, columns);}
 
+    Matrix::Matrix(const Matrix& mat)
+    {
+        init(mat.rows(), mat.columns());
+
+        auto data = mat.data();
+
+        for(int i = 0; i < m_size; i++)
+            m_ptr[i] = data[i];
+    }
+
     void Matrix::init(const uint32_t rows, const uint32_t columns)
     {
         m_rows = rows;
         m_columns = columns;
+        m_size = rows*columns;
 
-        m_empty = (m_rows * m_columns) == 0;
+        m_empty = (m_size == 0);
 
-        m_ptr = new double[m_rows * m_columns];
+        m_ptr = new double[m_size];
     }
 
     uint32_t Matrix::rows() const
@@ -32,7 +43,7 @@ namespace linalg {
 
     void Matrix::reshape(uint32_t rows, uint32_t columns)
     {
-        if(rows * columns != m_rows * m_columns)
+        if(rows * columns != m_size)
             throw std::out_of_range("Matrix: Wrong shape");
 
         m_rows = rows;
@@ -58,5 +69,10 @@ namespace linalg {
     bool Matrix::empty() const
     {
         return m_empty;
+    }
+
+    const double* Matrix::data() const
+    {
+        return m_ptr;
     }
 }
