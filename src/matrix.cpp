@@ -23,6 +23,22 @@ namespace linalg {
             m_ptr[i] = data[i];
     }
 
+    Matrix::Matrix(Matrix&& mat) noexcept
+    {
+        m_ptr = std::exchange(mat.m_ptr, nullptr);
+        m_columns = std::exchange(mat.m_columns, 0);
+        m_rows = std::exchange(mat.m_rows, 0);
+        m_size = std::exchange(mat.m_size, 0);
+        m_empty = std::exchange(mat.m_empty, true);
+    }
+
+    Matrix& Matrix::operator=(Matrix&& mat) noexcept
+    {
+       this->~Matrix();
+       new (this) Matrix(std::move(mat));
+        return *this;
+    }
+
     void Matrix::init(const uint32_t rows, const uint32_t columns)
     {
         m_rows = rows;

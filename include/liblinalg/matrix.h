@@ -3,6 +3,7 @@
 #include "liblinalg/export.h"
 #include <cstdint>
 #include <stdexcept>
+#include <utility>
 
 namespace linalg {
 
@@ -14,6 +15,10 @@ namespace linalg {
             Matrix(const uint32_t rows, const uint32_t columns);
 
             Matrix(const Matrix& mat);
+
+            Matrix(Matrix&& mat) noexcept;
+            Matrix& operator=(Matrix&& mat) noexcept;
+
             ~Matrix();
 
             uint32_t rows() const;

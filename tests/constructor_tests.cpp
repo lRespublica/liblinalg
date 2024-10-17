@@ -1,6 +1,7 @@
 #include <liblinalg/matrix.h>
 
 #include <gtest/gtest.h>
+#include <utility>
 
 TEST(ConstructorTest, RowsAndColumns)
 {
@@ -84,6 +85,78 @@ TEST(ConstructorTest, CopyConstructor)
         }
 
         linalg::Matrix newMat{test};
+
+        for (auto i = 0; i < newMat.rows(); i++)
+        {
+            for (auto j = 0; j < newMat.columns(); j++)
+            {
+                EXPECT_EQ(test(i,j),  newMat(i,j));
+            }
+        }
+    }
+    catch (...)
+    {FAIL();}
+}
+
+TEST(ConstructorTest, CopyAndMoveConstructor)
+{
+    uint32_t height = 10;
+    uint32_t width = 12;
+    try
+    {
+        linalg::Matrix test(height, width);
+
+        for (auto i = 0; i < test.rows(); i++)
+        {
+            for (auto j = 0; j < test.columns(); j++)
+            {
+                test(i, j) = i * test.rows() + j;
+            }
+        }
+
+        linalg::Matrix tmpMat{test};
+        EXPECT_NE(tmpMat.data(), nullptr);
+        EXPECT_FALSE(tmpMat.empty());
+
+        linalg::Matrix newMat{std::move(tmpMat)};
+        EXPECT_EQ(tmpMat.data(), nullptr);
+        EXPECT_TRUE(tmpMat.empty());
+
+        for (auto i = 0; i < newMat.rows(); i++)
+        {
+            for (auto j = 0; j < newMat.columns(); j++)
+            {
+                EXPECT_EQ(test(i,j),  newMat(i,j));
+            }
+        }
+    }
+    catch (...)
+    {FAIL();}
+}
+
+TEST(ConstructorTest, CopyAndMoveWithAssignment)
+{
+    uint32_t height = 10;
+    uint32_t width = 12;
+    try
+    {
+        linalg::Matrix test(height, width);
+
+        for (auto i = 0; i < test.rows(); i++)
+        {
+            for (auto j = 0; j < test.columns(); j++)
+            {
+                test(i, j) = i * test.rows() + j;
+            }
+        }
+
+        linalg::Matrix tmpMat{test};
+        EXPECT_NE(tmpMat.data(), nullptr);
+        EXPECT_FALSE(tmpMat.empty());
+
+        linalg::Matrix newMat = std::move(tmpMat);
+        EXPECT_EQ(tmpMat.data(), nullptr);
+        EXPECT_TRUE(tmpMat.empty());
 
         for (auto i = 0; i < newMat.rows(); i++)
         {
