@@ -28,7 +28,10 @@ namespace linalg {
 
         m_empty = (m_size == 0);
 
-        m_ptr = new double[m_size];
+        if (not m_empty)
+            m_ptr = new double[m_size];
+        else
+            m_ptr = nullptr;
     }
 
     uint32_t Matrix::rows() const
@@ -52,7 +55,7 @@ namespace linalg {
 
     double& Matrix::operator()(const uint32_t x, const uint32_t y)
     {
-        if(x > m_rows || y > m_columns)
+        if(x >= m_rows || y >= m_columns)
             throw std::out_of_range("Matrix: Out of bounds");
 
         return m_ptr[y*m_rows + x];
@@ -60,7 +63,7 @@ namespace linalg {
 
     const double& Matrix::operator()(const uint32_t x, const uint32_t y) const
     {
-        if(x > m_rows || y > m_columns)
+        if(x >= m_rows || y >= m_columns)
             throw std::out_of_range("Matrix: Out of bounds");
 
         return m_ptr[y*m_rows + x];

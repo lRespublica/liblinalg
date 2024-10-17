@@ -54,3 +54,51 @@ TEST(IndexTest, UncorrectRead)
     catch (...)
     {FAIL();}
 }
+
+TEST(IndexTest, OutOfRows)
+{
+    uint32_t height = 10;
+    uint32_t width = 12;
+    try
+    {
+        linalg::Matrix test(height, width);
+
+        for (auto i = 0; i <= test.rows(); i++)
+        {
+            for (auto j = 0; j < test.columns(); j++)
+            {
+                test(i,j);
+            }
+        }
+    }
+    catch(const std::out_of_range error)
+    {
+        EXPECT_STREQ("Matrix: Out of bounds", error.what());
+    }
+    catch (...)
+    {FAIL();}
+}
+
+TEST(IndexTest, OutOfColumns)
+{
+    uint32_t height = 10;
+    uint32_t width = 12;
+    try
+    {
+        linalg::Matrix test(height, width);
+
+        for (auto i = 0; i < test.rows(); i++)
+        {
+            for (auto j = 0; j <= test.columns(); j++)
+            {
+                test(i,j);
+            }
+        }
+    }
+    catch(const std::out_of_range error)
+    {
+        EXPECT_STREQ("Matrix: Out of bounds", error.what());
+    }
+    catch (...)
+    {FAIL();}
+}
