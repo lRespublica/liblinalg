@@ -15,6 +15,7 @@ namespace linalg {
             Matrix(const uint32_t rows, const uint32_t columns);
 
             Matrix(const Matrix& mat);
+            Matrix& operator=(const Matrix& mat);
 
             Matrix(Matrix&& mat) noexcept;
             Matrix& operator=(Matrix&& mat) noexcept;

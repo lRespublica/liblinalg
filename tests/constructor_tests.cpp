@@ -150,7 +150,7 @@ TEST(ConstructorTest, CopyAndMoveWithAssignment)
             }
         }
 
-        linalg::Matrix tmpMat{test};
+        linalg::Matrix tmpMat = test;
         EXPECT_NE(tmpMat.data(), nullptr);
         EXPECT_FALSE(tmpMat.empty());
 
