@@ -46,7 +46,10 @@ namespace linalg {
        return *this;
     }
 
-    Matrix::Matrix(std::initializer_list<std::initializer_list<double>> input)
+    Matrix::Matrix(std::initializer_list<double> input) : Matrix ({static_cast<std::vector<double>>(input)})
+    {}
+
+    Matrix::Matrix(std::initializer_list<std::vector<double>> input)
     {
         if(input.size() == 0)
         {
@@ -117,8 +120,6 @@ namespace linalg {
             m_ptr = nullptr;
         }
     }
-
-
 
     void Matrix::reshape(uint32_t rows, uint32_t columns)
     {

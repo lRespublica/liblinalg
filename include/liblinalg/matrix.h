@@ -24,7 +24,8 @@ namespace linalg {
             Matrix(Matrix&& mat) noexcept;
             Matrix& operator=(Matrix&& mat) noexcept;
 
-            Matrix(std::initializer_list<std::initializer_list<double>> input);
+            Matrix(std::initializer_list<double> input);
+            Matrix(std::initializer_list<std::vector<double>> input);
 
             ~Matrix();
 
