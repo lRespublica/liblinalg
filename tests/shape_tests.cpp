@@ -65,3 +65,16 @@ TEST(ShapeTest, Transpose2)
         FAIL();
     }
 }
+
+TEST(ShapeTest, Eye)
+{
+    try
+    {
+        linalg::Matrix mat1 = linalg::eye(10);
+        std::cout << mat1 << std::endl;
+    }
+    catch (...)
+    {
+        FAIL();
+    }
+}

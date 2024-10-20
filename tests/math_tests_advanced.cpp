@@ -216,3 +216,26 @@ TEST(MathTest, Invert3x3)
         FAIL();
     }
 }
+
+TEST(MathTest, Power3x3_To_3)
+{
+    try
+    {
+        linalg::Matrix mat ({{-4, -3, -2}, {-10, 7, 1}, {2, 3, 4}});
+        std::cout << mat << std::endl;
+
+        std::cout << linalg::eye(3) * mat << std::endl;
+
+        auto powMat = linalg::pow(mat, 17);
+        std::cout << powMat << std::endl;
+    }
+    catch (std::logic_error error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+    catch (...)
+    {
+        FAIL();
+    }
+}

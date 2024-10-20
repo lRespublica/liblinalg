@@ -440,6 +440,23 @@ namespace linalg {
         return m_ptr;
     }
 
+    Matrix eye(uint32_t size)
+    {
+        Matrix retMat(size, size);
+        for(int i = 0; i < size; i++)
+        {
+            for(int j = 0; j < size; j++)
+            {
+                if(i == j)
+                    retMat.at(i, j) = 1;
+                else
+                    retMat.at(i, j) = 0;
+            }
+        }
+
+        return retMat;
+    }
+
     Matrix concatenate(const Matrix& mat1, const Matrix& mat2)
     {
         if(mat1.rows() != mat2.rows())
@@ -504,6 +521,22 @@ namespace linalg {
         }
 
         retMat *= (1/det);
+        return retMat;
+    }
+
+    Matrix pow(const Matrix& mat, uint32_t power)
+    {
+        if(mat.empty())
+            return Matrix();
+
+        if(mat.columns() != mat.rows())
+            throw std::invalid_argument("Matrix: Non square matrix cannot be powered");
+
+        auto retMat = eye(mat.columns());
+
+        for(int i = 0; i < power; i++)
+            retMat *= mat;
+
         return retMat;
     }
 }
