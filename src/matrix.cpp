@@ -464,4 +464,22 @@ namespace linalg {
 
         return retMat;
     }
+
+    Matrix transpose(const Matrix& mat)
+    {
+        if(mat.empty())
+            return Matrix();
+
+        Matrix retMat(mat.columns(), mat.rows());
+
+        for(int i = 0; i < mat.rows(); i++)
+        {
+            for(int j = 0; j < mat.columns(); j++)
+            {
+                retMat.at(j, i) = mat.at(i, j);
+            }
+        }
+
+        return retMat;
+    }
 }
