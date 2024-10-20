@@ -196,3 +196,23 @@ TEST(MathTest, ConcatenateError)
     }
 }
 
+TEST(MathTest, Invert3x3)
+{
+    try
+    {
+        linalg::Matrix mat ({{-4, -3, -2}, {-10, 7, 1}, {2, 3, 4}});
+        std::cout << mat << std::endl;
+
+        auto revMat = linalg::invert(mat);
+        std::cout << revMat << std::endl;
+    }
+    catch (std::logic_error error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+    catch (...)
+    {
+        FAIL();
+    }
+}

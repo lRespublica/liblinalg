@@ -482,4 +482,28 @@ namespace linalg {
 
         return retMat;
     }
+
+    Matrix invert(const Matrix& mat)
+    {
+        if(mat.empty())
+            throw std::invalid_argument("Matrix: Cannot invert empty matrix");
+
+        auto det = mat.det();
+
+        if(det == 0)
+            throw std::invalid_argument("Matrix: cannot invert singular matrix");
+
+        Matrix retMat(mat.rows(), mat.columns());
+
+        for(int i = 0; i < mat.rows(); i++)
+        {
+            for(int j = 0; j < mat.columns(); j++)
+            {
+                retMat.at(i, j) = std::pow(-1, i + j)*mat.minor(j, i).det();
+            }
+        }
+
+        retMat *= (1/det);
+        return retMat;
+    }
 }

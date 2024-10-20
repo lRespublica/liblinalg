@@ -92,4 +92,6 @@ namespace linalg {
     LIBLINALG_EXPORT Matrix concatenate(const Matrix& mat1, const Matrix& mat2);
 
     LIBLINALG_EXPORT Matrix transpose(const Matrix& mat);
+
+    LIBLINALG_EXPORT Matrix invert(const Matrix& mat);
 }
