@@ -35,3 +35,16 @@ TEST(OutputTest, LongMatrix)
     linalg::Matrix mat2 = { {7, 1, 3, 0}, {2, 8, 17, 25}, {-3, 4, 0, 1}, {5, 6, 73, 12}, {95, 16, 40, 37}, {62, 283, 0, 1} };
     std::cout << mat2 << std::endl;
 }
+
+TEST(OutputTest, MoveShow)
+{
+    linalg::Matrix mat1 = { {7, 1, 3, 0}, {2, 8, 17, 25}, {-3, 4, 0, 1}, {5, 6, 73, 12}, {95, 16, 40, 37}, {62, 283, 0, 1} };
+
+    std::cout << mat1 << std::endl;
+
+    auto mat2 = std::move(mat1);
+    std::cout << mat2 << std::endl;
+
+    std::cout << "Empty matrix:\n" << std::endl;
+    std::cout << mat1 << std::endl;
+}
