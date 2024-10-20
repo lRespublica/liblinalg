@@ -143,7 +143,7 @@ TEST(ConstructorTest, CopyAndMoveWithAssignment)
     try
     {
         linalg::Matrix test(height, width);
-        test = {{1}, {2}, {3}, {4}, {5}};
+        test = {1, 2, 3, 4, 5};
 
         linalg::Matrix tmpMat = test;
         EXPECT_NE(tmpMat.data(), nullptr);
@@ -165,7 +165,7 @@ TEST(ConstructorTest, CopyAndMoveWithAssignment)
     {FAIL();}
 }
 
-TEST(ConstructorTest, InitalizerList)
+TEST(ConstructorTest, InitalizerList1)
 {
     uint32_t height = 3;
     uint32_t width = 5;
@@ -197,3 +197,15 @@ TEST(ConstructorTest, InitalizerList)
     {FAIL();}
 }
 
+TEST(ConstructorTest, InitalizerList2)
+{
+    try
+    {
+        linalg::Matrix mat = { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}, {17, 18, 19, 20}, {21, 22, 23, 24} };
+    }
+    catch (std::logic_error error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+}
