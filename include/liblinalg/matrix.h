@@ -38,10 +38,14 @@ namespace linalg {
             double& operator()(const uint32_t x, const uint32_t y);
             const double& operator()(const uint32_t x, const uint32_t y) const;
 
+            Matrix& operator+=(const Matrix& mat);
+            Matrix operator+(const Matrix& mat) const;
+
             double& at(const uint32_t x, const uint32_t y);
             const double& at(const uint32_t x, const uint32_t y) const;
 
             const double* data() const;
+            double* unsafeData();
 
             bool empty() const;
 

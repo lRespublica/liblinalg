@@ -147,6 +147,32 @@ namespace linalg {
     const double& Matrix::operator()(const uint32_t x, const uint32_t y) const
     {return this->at(x, y);}
 
+    Matrix& Matrix::operator+=(const Matrix& mat)
+    {
+        if(this->rows() != mat.rows() || this->columns() != mat.columns())
+            throw std::out_of_range("Matrix: Different size of matrices");
+
+        for(int i = 0; i < m_size; i++)
+            m_ptr[i] +=  mat.data()[i];
+
+        return *this;
+    }
+
+    Matrix Matrix::operator+(const Matrix& mat) const
+    {
+        if(this->rows() != mat.rows() || this->columns() != mat.columns())
+            throw std::out_of_range("Matrix: Different size of matrices");
+
+        Matrix retMat(m_rows, m_columns);
+
+        auto data = retMat.unsafeData();
+
+        for(int i = 0; i < m_size; i++)
+            data[i] = this->data()[i] + mat.data()[i];
+
+        return retMat;
+    }
+
     std::vector<std::string> Matrix::getStrings() const
     {
         std::vector<std::string> strings;
@@ -203,6 +229,11 @@ namespace linalg {
     }
 
     const double* Matrix::data() const
+    {
+        return m_ptr;
+    }
+
+    double* Matrix::unsafeData()
     {
         return m_ptr;
     }
