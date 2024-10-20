@@ -1,5 +1,4 @@
 #include "liblinalg/matrix.h"
-#include <cmath>
 
 namespace linalg {
     Matrix::Matrix()
@@ -189,6 +188,50 @@ namespace linalg {
             res += this->at(i, i);
 
         return res;
+    }
+
+    double Matrix::det() const
+    {
+        if(m_rows != m_columns)
+        {
+            throw std::invalid_argument("Matrix: Cannot calculate determinant from non-square matrix");
+        }
+
+        if(m_size == 1)
+            return m_ptr[0];
+
+        double res = 0;
+        for(int i = 0; i < m_columns; i++)
+        {
+            res += std::pow(-1, i + 2) * this->at(i, 0) * minor(i, 0).det();
+        }
+
+        return res;
+    }
+
+    Matrix Matrix::minor(double x, double y) const
+    {
+        Matrix retMat(m_rows - 1, m_columns - 1);
+        for(int i = 0; i < m_rows; i++)
+        {
+            for(int j = 0; j < m_columns; j++)
+            {
+                if(i == x || j == y)
+                    continue;
+
+                auto row = i;
+                auto col = j;
+
+                if(i > x)
+                    row--;
+                if(j > y)
+                    col--;
+
+                retMat.at(row, col) = this->at(i, j);
+            }
+        }
+
+        return retMat;
     }
 
     Matrix& Matrix::operator+=(const Matrix& mat)

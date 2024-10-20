@@ -14,7 +14,6 @@ TEST(OutputTest, CoutWithPoint)
 {
     linalg::Matrix mat({ {1, 333.124, 1, 1, 333}, {22, 1.90001, 1, 333, 333}, {1, 1, 1, 333, 1}, {1, 22, 1, 22, 22} });
     std::cout << mat;
-    std::cout << mat(0, 0);
 }
 
 TEST(OutputTest, Row)

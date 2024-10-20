@@ -45,6 +45,9 @@ namespace linalg {
 
             double norm() const;
             double trace() const;
+            double det() const;
+
+            Matrix minor(double x, double y) const;
 
             Matrix& operator+=(const Matrix& mat);
             Matrix operator+(const Matrix& mat) const;
