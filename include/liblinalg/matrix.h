@@ -31,6 +31,7 @@ namespace linalg {
 
             uint32_t rows() const;
             uint32_t columns() const;
+            uint64_t size() const;
 
             void clear();
             void reshape(const uint32_t rows, const uint32_t columns);
@@ -53,6 +54,9 @@ namespace linalg {
             Matrix& operator*=(const Matrix& mat);
             Matrix operator*(const Matrix& mat) const;
 
+            bool operator== (const Matrix& mat) const;
+            bool operator!= (const Matrix& mat) const;
+
             const double* data() const;
             double* unsafeData();
 
@@ -73,6 +77,8 @@ namespace linalg {
 
             bool m_empty;
     };
+
+    bool compareDouble(double val1, double val2);
 
     LIBLINALG_EXPORT Matrix operator*(double val, const Matrix& mat);
 }

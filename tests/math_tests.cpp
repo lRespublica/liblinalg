@@ -221,10 +221,14 @@ TEST(MathTest, ProdMatrixOnMatrix1)
         linalg::Matrix mat2 = { {7, 1, 3, 0}, {2, 8, 17, 25}, {-3, 4, 0, 1}, {5, 6, 73, 12}, {62, 283, 0, 1} };
         std::cout << mat2 << std::endl;
 
-        linalg::Matrix avaitedResult ({ {950, 3871, 2396, 1338}, {-181, -2941, 1017, 978}, {3833, 578, 1818, 75}, {760, 1032, 6260, 982}});
+        EXPECT_EQ(mat1 == mat2, false);
+
+        linalg::Matrix awaitedResult ({ {950, 3871, 2396, 1338}, {-181, -2941, 1017, 978}, {3833, 578, 1818, 75}, {760, 1032, 6260, 982}});
 
         mat1 *= mat2;
         std::cout << mat1 << std::endl;
+
+        EXPECT_EQ(mat1 == awaitedResult, true);
     }
     catch (std::logic_error error)
     {
@@ -243,7 +247,14 @@ TEST(MathTest, ProdMatrixOnMatrix2)
         linalg::Matrix mat2 ({ {950, 3871, 2396, 1338}, {-181, -2941, 1017, 978}, {3833, 578, 1818, 75}, {760, 1032, 6260, 982}});
         std::cout << mat2 << std::endl;
 
-        std::cout << mat1 * mat2 << std::endl;
+        linalg::Matrix awaitedResult ({{ 17968, 25890, 23243, 10569}, {84613, 19840, 200334, 36325},
+                                       {-2814, -22345, 3140, 880}, {292593, 56287, 225916, 29817},
+                                       {8437, -591269, 442623, 360712}} );
+
+        auto mat3 =  mat1 * mat2;
+
+        std::cout << mat3 << std::endl;
+        EXPECT_EQ(mat3, awaitedResult);
     }
     catch (std::logic_error error)
     {

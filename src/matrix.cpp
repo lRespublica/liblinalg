@@ -107,6 +107,11 @@ namespace linalg {
         return m_columns;
     }
 
+    uint64_t Matrix::size() const
+    {
+        return m_size;
+    }
+
     void Matrix::clear()
     {
         m_columns = 0;
@@ -264,6 +269,43 @@ namespace linalg {
         auto retMat = Matrix(*this);
         retMat *= mat;
         return retMat;
+    }
+
+    bool Matrix::operator== (const Matrix& mat) const
+    {
+        if(m_size != mat.size())
+            return false;
+
+        if(m_empty == true && mat.empty() == true)
+            return true;
+
+        auto data = mat.data();
+
+        for(int i = 0; i < m_size; i++)
+        {
+            if (compareDouble(m_ptr[i], data[i]) != true)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    bool Matrix::operator!= (const Matrix& mat) const
+    {
+        return !(*this == mat);
+    }
+
+    bool compareDouble(double val1, double val2)
+    {
+        const auto relative_difference_factor = 0.0001;
+        const auto greater_magnitude = std::max(std::abs(val1),std::abs(val2));
+
+        if ( std::abs(val1-val2) < relative_difference_factor * greater_magnitude )
+            return true;
+        else
+            return false;
     }
 
     std::vector<std::string> Matrix::getStrings() const
