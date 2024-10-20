@@ -41,6 +41,9 @@ namespace linalg {
             Matrix& operator+=(const Matrix& mat);
             Matrix operator+(const Matrix& mat) const;
 
+            Matrix& operator*=(double val);
+            Matrix operator*(double val) const;
+
             double& at(const uint32_t x, const uint32_t y);
             const double& at(const uint32_t x, const uint32_t y) const;
 
@@ -64,4 +67,6 @@ namespace linalg {
 
             bool m_empty;
     };
+
+    LIBLINALG_EXPORT Matrix operator*(double val, const Matrix& mat);
 }

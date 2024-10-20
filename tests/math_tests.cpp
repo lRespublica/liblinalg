@@ -80,3 +80,57 @@ TEST(MathTest, SumEmptyMatrices)
     }
 }
 
+TEST(MathTest, ProdMatrixOnDouble)
+{
+    try
+    {
+        linalg::Matrix mat1 ({ {1, 42, 0, 23, 12}, {75, 38, 16, 2, -12}, {546, 2, 1, 2, 0}, {24, -1, -15, 85, 2} });
+        std::cout << mat1 << std::endl;
+
+        auto mat2 = mat1 * (-1);
+        std::cout << mat2 << std::endl;
+    }
+    catch (std::exception error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+}
+
+TEST(MathTest, ProdDoubleOnMatrix)
+{
+    try
+    {
+        linalg::Matrix mat1 ({ {1, 42, 0, 23, 12}, {75, 38, 16, 2, -12}, {546, 2, 1, 2, 0}, {24, -1, -15, 85, 2} });
+        std::cout << mat1 << std::endl;
+
+        auto mat2 = -10 * mat1;
+        std::cout << mat2 << std::endl;
+    }
+    catch (std::exception error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+}
+
+TEST(MathTest, ProdEmptyMatrixOnDouble)
+{
+    try
+    {
+        linalg::Matrix mat1;
+
+        auto mat3 = mat1 * -1;
+        FAIL();
+    }
+    catch(const std::invalid_argument error)
+    {
+        std::cout << error.what() << std::endl;
+        EXPECT_STREQ("Matrix: Trying to multiply a number by an empty matrix", error.what());
+    }
+    catch (std::exception error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+}

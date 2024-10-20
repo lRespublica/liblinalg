@@ -168,11 +168,28 @@ namespace linalg {
         return retMat;
     }
 
-        auto data = retMat.unsafeData();
+    Matrix& Matrix::operator*=(double val)
+    {
+        if(this->empty())
+            throw std::invalid_argument("Matrix: Trying to multiply a number by an empty matrix");
 
         for(int i = 0; i < m_size; i++)
-            data[i] = this->data()[i] + mat.data()[i];
+            m_ptr[i] *= val;
 
+        return *this;
+    }
+
+    Matrix Matrix::operator*(double val) const
+    {
+        auto retMat = Matrix(*this);
+        retMat *= val;
+        return retMat;
+    }
+
+    Matrix operator*(double val, const Matrix& mat)
+    {
+        auto retMat = Matrix(mat);
+        retMat *= val;
         return retMat;
     }
 
