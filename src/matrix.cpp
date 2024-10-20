@@ -168,6 +168,27 @@ namespace linalg {
         return retMat;
     }
 
+    Matrix& Matrix::operator-=(const Matrix& mat)
+    {
+        if(this->rows() != mat.rows() || this->columns() != mat.columns())
+            throw std::out_of_range("Matrix: Different size of matrices");
+
+        if(this->empty())
+            throw std::invalid_argument("Matrix: Trying to sum empty matrices");
+
+        for(int i = 0; i < m_size; i++)
+            m_ptr[i] -=  mat.data()[i];
+
+        return *this;
+    }
+
+    Matrix Matrix::operator-(const Matrix& mat) const
+    {
+        auto retMat = Matrix(*this);
+        retMat -= mat;
+        return retMat;
+    }
+
     Matrix& Matrix::operator*=(double val)
     {
         if(this->empty())
