@@ -22,3 +22,16 @@ TEST(OutputTest, Row)
     linalg::Matrix mat = { 1, 333, 1, 22};
     std::cout << mat;
 }
+
+TEST(OutputTest, Dot)
+{
+    linalg::Matrix mat = {1};
+    std::cout << mat << std::endl;
+    std::cout << mat.at(0, 0) << std::endl;
+}
+
+TEST(OutputTest, LongMatrix)
+{
+    linalg::Matrix mat2 = { {7, 1, 3, 0}, {2, 8, 17, 25}, {-3, 4, 0, 1}, {5, 6, 73, 12}, {95, 16, 40, 37}, {62, 283, 0, 1} };
+    std::cout << mat2 << std::endl;
+}

@@ -253,7 +253,7 @@ namespace linalg {
             for(auto j = 0; j < mat.m_columns; j++)
             {
                 os.width(maxLen);
-                os << strings[i*mat.m_rows + j];
+                os << strings[j*mat.m_rows + i];
                 os << " ";
             }
 
