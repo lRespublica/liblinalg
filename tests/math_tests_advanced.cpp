@@ -172,3 +172,27 @@ TEST(MathTest, Concatenate)
     }
 }
 
+TEST(MathTest, ConcatenateError)
+{
+    try
+    {
+        linalg::Matrix mat1 ({ {950, 3871, 2396, 1338, 1}, {-181, -2941, 1017, 978, 1}, {3833, 578, 1818, 75, 1}, {760, 1032, 6260, 982, 1}});
+        std::cout << mat1 << std::endl;
+
+        linalg::Matrix mat2 = { {7, 1, 3}, {2, 8, 25}, {-3, 4, 1}, {5, 6, 12}, {0, 0, 0} };
+        std::cout << mat2 << std::endl;
+
+        auto mat3 = linalg::concatenate(mat1, mat2);
+        FAIL();
+    }
+    catch (std::logic_error error)
+    {
+        std::cout << error.what() << std::endl;
+        EXPECT_STREQ(error.what(), "Matrix: Cannot concatenate matrix with different height");
+    }
+    catch (...)
+    {
+        FAIL();
+    }
+}
+
