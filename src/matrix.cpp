@@ -229,6 +229,43 @@ namespace linalg {
         return retMat;
     }
 
+    Matrix& Matrix::operator*=(const Matrix& mat)
+    {
+        if(this->columns() != mat.rows())
+        {
+            throw std::out_of_range("Matrix: Matrices are incompatible for multiplication");
+        }
+
+        Matrix resMat(this->rows(), mat.columns());
+
+        auto sameDim = mat.rows(); // = this->columns()
+
+        for(int i = 0; i < resMat.rows(); i++)
+        {
+            for(int j = 0; j < resMat.columns(); j++)
+            {
+                double newElem = 0;
+                for(int k = 0; k < sameDim; k++)
+                {
+                    newElem += this->at(i, k) * mat.at(k, j);
+                }
+                resMat.at(i, j) = newElem;
+            }
+        }
+
+
+        this->~Matrix();
+        new (this) Matrix(std::move(resMat));
+        return *this;
+    }
+
+    Matrix Matrix::operator*(const Matrix& mat) const
+    {
+        auto retMat = Matrix(*this);
+        retMat *= mat;
+        return retMat;
+    }
+
     std::vector<std::string> Matrix::getStrings() const
     {
         std::vector<std::string> strings;

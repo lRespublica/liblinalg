@@ -50,8 +50,8 @@ namespace linalg {
             Matrix& operator*=(double val);
             Matrix operator*(double val) const;
 
-            double& at(const uint32_t x, const uint32_t y);
-            double at(const uint32_t x, const uint32_t y) const;
+            Matrix& operator*=(const Matrix& mat);
+            Matrix operator*(const Matrix& mat) const;
 
             const double* data() const;
             double* unsafeData();
