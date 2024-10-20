@@ -152,6 +152,9 @@ namespace linalg {
         if(this->rows() != mat.rows() || this->columns() != mat.columns())
             throw std::out_of_range("Matrix: Different size of matrices");
 
+        if(this->empty())
+            throw std::invalid_argument("Matrix: Trying to sum empty matrices");
+
         for(int i = 0; i < m_size; i++)
             m_ptr[i] +=  mat.data()[i];
 
@@ -160,10 +163,10 @@ namespace linalg {
 
     Matrix Matrix::operator+(const Matrix& mat) const
     {
-        if(this->rows() != mat.rows() || this->columns() != mat.columns())
-            throw std::out_of_range("Matrix: Different size of matrices");
-
-        Matrix retMat(m_rows, m_columns);
+        auto retMat = Matrix(*this);
+        retMat += mat;
+        return retMat;
+    }
 
         auto data = retMat.unsafeData();
 

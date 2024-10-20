@@ -1,3 +1,4 @@
+#include <exception>
 #include <liblinalg/matrix.h>
 #include <gtest/gtest.h>
 #include <ostream>
@@ -32,7 +33,7 @@ TEST(MathTest, SumAssignment)
     std::cout << mat3;
 }
 
-TEST(MathTest, WrongShape)
+TEST(MathTest, WrongShapeOnSum)
 {
     uint32_t height = 10;
     uint32_t width = 12;
@@ -49,7 +50,33 @@ TEST(MathTest, WrongShape)
         std::cout << error.what() << std::endl;
         EXPECT_STREQ("Matrix: Different size of matrices", error.what());
     }
-    catch (...)
-    {FAIL();}
+    catch (std::exception error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+
+}
+
+TEST(MathTest, SumEmptyMatrices)
+{
+    try
+    {
+        linalg::Matrix mat1;
+        linalg::Matrix mat2;
+
+        auto mat3 = mat1 + mat2;
+        FAIL();
+    }
+    catch(const std::invalid_argument error)
+    {
+        std::cout << error.what() << std::endl;
+        EXPECT_STREQ("Matrix: Trying to sum empty matrices", error.what());
+    }
+    catch (std::exception error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
 }
 
