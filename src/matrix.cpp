@@ -139,13 +139,28 @@ namespace linalg {
     }
 
     const double& Matrix::at(const uint32_t x, const uint32_t y) const
-    {return this->at(x, y);}
+    {
+        if(x >= m_rows || y >= m_columns)
+            throw std::out_of_range("Matrix: Out of bounds");
+
+        return m_ptr[y*m_rows + x];
+    }
 
     double& Matrix::operator()(const uint32_t x, const uint32_t y)
-    {return this->at(x, y);}
+    {
+        if(x >= m_rows || y >= m_columns)
+            throw std::out_of_range("Matrix: Out of bounds");
+
+        return m_ptr[y*m_rows + x];
+    }
 
     const double& Matrix::operator()(const uint32_t x, const uint32_t y) const
-    {return this->at(x, y);}
+    {
+        if(x >= m_rows || y >= m_columns)
+            throw std::out_of_range("Matrix: Out of bounds");
+
+        return m_ptr[y*m_rows + x];
+    }
 
     Matrix& Matrix::operator+=(const Matrix& mat)
     {

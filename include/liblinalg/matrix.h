@@ -35,6 +35,9 @@ namespace linalg {
             void clear();
             void reshape(const uint32_t rows, const uint32_t columns);
 
+            double& at(const uint32_t x, const uint32_t y);
+            const double& at(const uint32_t x, const uint32_t y) const;
+
             double& operator()(const uint32_t x, const uint32_t y);
             const double& operator()(const uint32_t x, const uint32_t y) const;
 
@@ -48,7 +51,7 @@ namespace linalg {
             Matrix operator*(double val) const;
 
             double& at(const uint32_t x, const uint32_t y);
-            const double& at(const uint32_t x, const uint32_t y) const;
+            double at(const uint32_t x, const uint32_t y) const;
 
             const double* data() const;
             double* unsafeData();
