@@ -88,4 +88,6 @@ namespace linalg {
     bool compareDouble(double val1, double val2);
 
     LIBLINALG_EXPORT Matrix operator*(double val, const Matrix& mat);
+
+    LIBLINALG_EXPORT Matrix concatenate(const Matrix& mat1, const Matrix& mat2);
 }

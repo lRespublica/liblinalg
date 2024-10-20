@@ -439,4 +439,29 @@ namespace linalg {
     {
         return m_ptr;
     }
+
+    Matrix concatenate(const Matrix& mat1, const Matrix& mat2)
+    {
+        if(mat1.rows() != mat2.rows())
+            throw std::invalid_argument("Matrix: Cannot concatenate matrix with different height");
+
+        Matrix retMat(mat1.rows(), mat1.columns() + mat2.columns());
+
+        for(int i = 0; i < retMat.rows(); i++)
+        {
+            for(int j = 0; j < retMat.columns(); j++)
+            {
+                if (j < mat1.columns())
+                {
+                    retMat.at(i, j) = mat1.at(i, j);
+                }
+                else
+                {
+                    retMat.at(i, j) = mat2.at(i, j - mat1.columns());
+                }
+            }
+        }
+
+        return retMat;
+    }
 }
