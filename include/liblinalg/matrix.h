@@ -8,6 +8,7 @@
 #include <utility>
 #include <string>
 #include <vector>
+#include <cmath>
 
 namespace linalg {
 
@@ -41,6 +42,8 @@ namespace linalg {
 
             double& operator()(const uint32_t x, const uint32_t y);
             const double& operator()(const uint32_t x, const uint32_t y) const;
+
+            double norm() const;
 
             Matrix& operator+=(const Matrix& mat);
             Matrix operator+(const Matrix& mat) const;

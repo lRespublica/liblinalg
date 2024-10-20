@@ -1,4 +1,5 @@
 #include "liblinalg/matrix.h"
+#include <cmath>
 
 namespace linalg {
     Matrix::Matrix()
@@ -165,6 +166,15 @@ namespace linalg {
             throw std::out_of_range("Matrix: Out of bounds");
 
         return m_ptr[y*m_rows + x];
+    }
+
+    double Matrix::norm() const
+    {
+        double res = 0;
+        for(int i = 0; i < m_size; i++)
+            res += std::pow(m_ptr[i], 2);
+
+        return std::sqrt(res);
     }
 
     Matrix& Matrix::operator+=(const Matrix& mat)

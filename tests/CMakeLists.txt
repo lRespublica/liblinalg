@@ -31,6 +31,7 @@ find_package(GTest CONFIG REQUIRED)
 
 set(sources
     math_tests.cpp
+    math_tests_advanced.cpp
     output_tests.cpp
     index_tests.cpp
     constructor_tests.cpp
