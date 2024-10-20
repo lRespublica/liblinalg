@@ -177,6 +177,20 @@ namespace linalg {
         return std::sqrt(res);
     }
 
+    double Matrix::trace() const
+    {
+        if(m_rows != m_columns)
+        {
+            throw std::invalid_argument("Matrix: Cannot calculate trace from non-square matrix");
+        }
+
+        double res = 0;
+        for(int i = 0; i < m_rows; i++)
+            res += this->at(i, i);
+
+        return res;
+    }
+
     Matrix& Matrix::operator+=(const Matrix& mat)
     {
         if(this->rows() != mat.rows() || this->columns() != mat.columns())
