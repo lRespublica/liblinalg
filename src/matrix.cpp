@@ -534,8 +534,20 @@ namespace linalg {
 
         auto retMat = eye(mat.columns());
 
-        for(int i = 0; i < power; i++)
-            retMat *= mat;
+        auto i = 0;
+        while (i < power)
+        {
+            if(2*i < power && i > 1)
+            {
+                retMat *= retMat;
+                i *= 2;
+            }
+            else
+            {
+                retMat *= mat;
+                i++;
+            }
+        }
 
         return retMat;
     }

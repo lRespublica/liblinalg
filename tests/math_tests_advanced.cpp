@@ -224,10 +224,41 @@ TEST(MathTest, Power3x3_To_3)
         linalg::Matrix mat ({{-4, -3, -2}, {-10, 7, 1}, {2, 3, 4}});
         std::cout << mat << std::endl;
 
-        std::cout << linalg::eye(3) * mat << std::endl;
+        auto powMat = linalg::pow(mat, 3);
+        linalg::Matrix awaitedResult = {{ -24, -240, -111 },
+                                        {-646,  751,  262 },
+                                        {-120,  324,  147 }};
 
-        auto powMat = linalg::pow(mat, 17);
         std::cout << powMat << std::endl;
+        EXPECT_EQ(awaitedResult, powMat);
+    }
+    catch (std::logic_error error)
+    {
+        std::cout << error.what() << std::endl;
+        FAIL();
+    }
+    catch (...)
+    {
+        FAIL();
+    }
+}
+
+TEST(MathTest, Power5x5_To_9)
+{
+    try
+    {
+        linalg::Matrix mat ({{-4, -3, -2, 7, 12}, {-10, 7, 1, 1, -2}, {2, 3, 4, 2, 2}, {6, 1, 2, 3, 0}, {19, 1, 2, -1, -19}});
+        std::cout << mat << std::endl;
+
+        auto powMat = linalg::pow(mat, 9);
+        linalg::Matrix awaitedResult = {{ -4440410788944,   -496067470984,   -645596005999,   1190672454220,   5303657726290 },
+                                        { -778547989428,    -84351940931,   -112294192561,    204129889140,   921981647542 },
+                                        { -231601322352,    -25358542811,    -33475558557,     61396263959,    275308394604 },
+                                        { 869343498720,     96584615510,    126231065413,   -231969109574,  -1036505905002},
+                                        { 8558230259887,    953513927628,   1243432938937,  -2290009965832, -10213895780405}};
+
+        std::cout << powMat << std::endl;
+        EXPECT_EQ(awaitedResult, powMat);
     }
     catch (std::logic_error error)
     {
